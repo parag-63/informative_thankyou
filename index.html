@@ -3,12 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Enhanced Thank You Modal - Bosscoder Academy</title>
+    <title>Updated Modal for New Tab - Bosscoder Academy</title>
     
-    <!-- Tailwind CSS for styling -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Google Fonts: Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -39,20 +37,17 @@
             stroke-dashoffset: 48;
             animation: draw-check 0.4s 0.3s ease-in-out forwards;
         }
-
-        /* Styling for the background to mimic the original page */
         .main-content-bg {
-             background-color: #f8fafc; /* A light gray like the screenshot */
+             background-color: #f8fafc;
         }
     </style>
 </head>
 <body class="main-content-bg">
 
-    <!-- Mockup of the original page content for context -->
     <div id="page-content" class="p-8 md:p-16 max-w-6xl mx-auto transition-filter duration-300">
         <header class="mb-12">
             <h1 class="text-2xl font-bold text-gray-800">
-                <span class="text-indigo-600">BOSCODER</span> ACADEMY
+                <span class="text-indigo-600">Bosscoder</span> ACADEMY
             </h1>
         </header>
         <main class="grid md:grid-cols-2 gap-16 items-center">
@@ -65,7 +60,7 @@
                 </p>
                 <div class="mt-10">
                     <button id="download-btn" class="bg-indigo-600 text-white font-bold py-4 px-8 rounded-lg shadow-lg hover:bg-indigo-700 transition-all duration-300 transform hover:-translate-y-1">
-                        Download Now
+                        Get the Guide
                     </button>
                 </div>
             </div>
@@ -75,22 +70,16 @@
         </main>
     </div>
 
-    <!-- The Enhanced Modal -->
-    <!-- The modal container is hidden by default and positioned over the whole screen -->
     <div id="thank-you-modal" class="fixed inset-0 bg-gray-900 bg-opacity-60 backdrop-blur-sm flex items-center justify-center p-4 transition-opacity duration-300 opacity-0 pointer-events-none">
         
-        <!-- Modal Content Box -->
-        <!-- Starts scaled down and invisible, will be animated in with JS -->
         <div id="modal-content" class="bg-white rounded-2xl shadow-xl max-w-md w-full p-8 text-center transform scale-95 opacity-0 transition-all duration-300 ease-in-out">
             
-            <!-- Close Button -->
             <button id="close-modal-btn" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                 </svg>
             </button>
 
-            <!-- Animated Checkmark Icon -->
             <div class="mx-auto mb-6">
                 <svg class="w-20 h-20 mx-auto" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
                     <circle class="check-circle" cx="26" cy="26" r="25" fill="#d1fae5"/>
@@ -98,15 +87,16 @@
                 </svg>
             </div>
 
-            <!-- Modal Heading -->
-            <h2 class="text-3xl font-bold text-gray-800 mb-3">Thank You!</h2>
+            <h2 class="text-3xl font-bold text-gray-800 mb-3">Success!</h2>
 
-            <!-- Descriptive Text -->
-            <p class="text-gray-600 mb-8">
-                Your download has started. The <strong>"Spring Boot Interview Guide"</strong> should be in your downloads folder shortly!
+            <p class="text-gray-600 mb-2">
+                We've opened the <strong>"Spring Boot Interview Guide"</strong> for you in a new browser tab.
             </p>
 
-            <!-- Call to Action Button -->
+            <p class="text-sm text-gray-500 mb-8">
+                Don't see it? Please check if your browser blocked the pop-up.
+            </p>
+
             <a href="#" class="w-full block bg-indigo-600 text-white font-semibold py-3 px-6 rounded-lg shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all duration-300">
                 Explore Our Courses
             </a>
@@ -114,47 +104,46 @@
     </div>
 
     <script>
-        // --- Get all the necessary elements from the DOM ---
         const downloadBtn = document.getElementById('download-btn');
         const modalContainer = document.getElementById('thank-you-modal');
         const modalContent = document.getElementById('modal-content');
         const closeModalBtn = document.getElementById('close-modal-btn');
         const pageContent = document.getElementById('page-content');
         
-        // --- Function to open the modal with animations ---
-        const openModal = () => {
+        // --- MODIFIED JAVASCRIPT ---
+        // This function now simulates opening a PDF in a new tab
+        const openPdfAndShowModal = () => {
+            // This line simulates opening the PDF in a new tab.
+            // Replace '#' with the actual path to your PDF file.
+            // window.open('#', '_blank');
+
+            // Now, show the confirmation modal.
             modalContainer.classList.remove('opacity-0', 'pointer-events-none');
             modalContent.classList.remove('scale-95', 'opacity-0');
-            modalContent.classList.add('animate-check'); // Trigger SVG animation
-            pageContent.style.filter = 'blur(4px)'; // Blur the background content
+            modalContent.classList.add('animate-check');
+            pageContent.style.filter = 'blur(4px)';
         };
 
-        // --- Function to close the modal with animations ---
         const closeModal = () => {
             modalContainer.classList.add('opacity-0', 'pointer-events-none');
             modalContent.classList.add('scale-95', 'opacity-0');
-            pageContent.style.filter = 'none'; // Remove blur from background
+            pageContent.style.filter = 'none';
         };
 
-        // --- Event Listeners ---
-        // Open the modal when the main download button is clicked
+        // Event listener on the button calls the new function
         downloadBtn.addEventListener('click', (e) => {
-            e.preventDefault(); // Prevent default button action
-            openModal();
+            e.preventDefault();
+            openPdfAndShowModal();
         });
 
-        // Close the modal when the 'X' button is clicked
         closeModalBtn.addEventListener('click', closeModal);
 
-        // Close the modal when the user clicks on the backdrop (outside the content box)
         modalContainer.addEventListener('click', (event) => {
-            // Check if the click was on the container itself and not on its children
             if (event.target === modalContainer) {
                 closeModal();
             }
         });
 
-        // Close the modal when the 'Escape' key is pressed
         document.addEventListener('keydown', (event) => {
             if (event.key === 'Escape' && !modalContainer.classList.contains('pointer-events-none')) {
                 closeModal();
